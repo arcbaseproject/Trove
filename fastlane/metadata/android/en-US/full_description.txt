@@ -1,0 +1,14 @@
+Trove turns your screenshot folder into a searchable library. It reads the text in each screenshot on your phone, sorts them into categories, and lets you search by any word you remember seeing.
+
+<b>Features</b>
+<ul>
+<li>Full-text search across everything written in your screenshots</li>
+<li>Automatic categories such as receipts, code, and conversations</li>
+<li>Collections, tags, notes, and favorites</li>
+<li>Tap a link, email address, or phone number found in a screenshot to open it</li>
+<li>Exact-duplicate finder. Deletion always asks first through Android's own dialog</li>
+<li>Light, dark, and dynamic color themes</li>
+</ul>
+
+<b>Private by design</b>
+No account, no ads, no internet permission. Text recognition and sorting run on your phone. Your screenshot files are never copied or moved.

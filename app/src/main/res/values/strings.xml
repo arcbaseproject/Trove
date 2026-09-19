@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Trove</string>
+
+    <string name="nav_home">Home</string>
+    <string name="nav_library">Library</string>
+    <string name="nav_search">Search</string>
+    <string name="nav_collections">Collections</string>
+    <string name="nav_settings">Settings</string>
+
+    <string name="search_hint">Search your screenshots</string>
+    <string name="recent_screenshots">Recent</string>
+    <string name="smart_collections">Categories</string>
+    <string name="see_all">See all</string>
+
+    <string name="permission_title">Access your screenshots</string>
+    <string name="permission_body">Trove reads your screenshots on this device to organize and search them. Nothing leaves your phone.</string>
+    <string name="permission_grant">Grant access</string>
+    <string name="permission_denied_body">Trove needs photo access to find your screenshots. Turn it on in system settings.</string>
+    <string name="permission_open_settings">Open settings</string>
+
+    <string name="onboarding_skip">Skip</string>
+    <string name="onboarding_next">Next</string>
+    <string name="onboarding_start">Get started</string>
+    <string name="onboarding_sorted_title">Every screenshot, sorted</string>
+    <string name="onboarding_sorted_body">Trove reads your screenshots and files them under receipts, code, chats, and more.</string>
+    <string name="onboarding_search_title">Search what\'s inside</string>
+    <string name="onboarding_search_body">Type a word you remember seeing. Trove finds the screenshot that has it.</string>
+    <string name="onboarding_private_title">Stays on your phone</string>
+    <string name="onboarding_private_body">Next, Android asks for photo access. Trove only reads your screenshots, and only on this device.</string>
+    <string name="onboarding_art_receipts">Receipts</string>
+    <string name="onboarding_art_code">Code</string>
+    <string name="onboarding_art_chats">Conversations</string>
+    <string name="onboarding_art_count">%1$d screenshots</string>
+    <string name="onboarding_art_query">wifi password</string>
+    <string name="onboarding_art_match">Wifi password: sunflower42</string>
+    <string name="onboarding_art_on_device">Text recognition on your phone</string>
+    <string name="onboarding_art_no_account">No account to create</string>
+    <string name="onboarding_art_no_uploads">Nothing uploaded</string>
+
+    <string name="indexing_title">Reading your screenshots</string>
+    <string name="indexing_count">%1$d/%2$d</string>
+
+    <string name="loading">Loading</string>
+
+    <string name="empty_library_title">No screenshots yet</string>
+    <string name="empty_library_body">Take a screenshot and it shows up here.</string>
+    <string name="search_prompt_title">Find anything</string>
+    <string name="search_prompt_body">Try \"receipt\", \"code\", \"blue shoes\", or an app name.</string>
+    <string name="empty_search_title">Nothing found</string>
+    <string name="empty_search_body">Try a different word, app name, or category.</string>
+    <string name="empty_collections_title">No collections yet</string>
+    <string name="empty_collections_body">Group related screenshots into a collection.</string>
+
+    <string name="action_favorite">Favorite</string>
+    <string name="action_unfavorite">Unfavorite</string>
+    <string name="action_share">Share</string>
+    <string name="action_delete">Delete</string>
+    <string name="action_add_to_collection">Add to collection</string>
+    <string name="action_add_tag">Add tag</string>
+    <string name="action_copy_text">Copy text</string>
+    <string name="action_new_collection">New collection</string>
+    <string name="action_new">New</string>
+    <string name="action_create">Create</string>
+    <string name="action_cancel">Cancel</string>
+
+    <string name="details_title">Details</string>
+    <string name="details_dimensions">Dimensions</string>
+    <string name="details_size">File size</string>
+    <string name="details_date">Date</string>
+    <string name="details_source_app">Source app</string>
+    <string name="details_ocr_text">Recognized text</string>
+    <string name="details_actions">Actions</string>
+    <string name="details_categories">Categories</string>
+    <string name="details_tags">Tags</string>
+    <string name="details_notes">Notes</string>
+    <string name="details_collections">Collections</string>
+
+    <string name="privacy_title">Privacy</string>
+    <string name="privacy_policy_title">Privacy Policy</string>
+    <string name="privacy_headline">Your screenshots stay on your device.</string>
+    <string name="privacy_body">ML Kit reads text and sorts screenshots on your phone. Trove sends no screenshots, thumbnails, or extracted text anywhere. Usage data stays off unless you turn it on in Settings.</string>
+    <string name="privacy_updated">Last updated September 19, 2026</string>
+    <string name="privacy_intro">This policy explains what Trove accesses, what it keeps, and what you control. Trove is built to work entirely on your phone.</string>
+    <string name="privacy_accesses_title">What Trove accesses</string>
+    <string name="privacy_accesses_body">Trove reads the screenshots in your photo library so it can organize and search them. It asks for read-only photo access. On Android 14 and later you can grant access to selected photos instead of your whole library. Trove reads the image files and their details, such as date, size, and the app that took them.</string>
+    <string name="privacy_stores_title">What Trove stores</string>
+    <string name="privacy_stores_body">Trove keeps a private database on your phone. It holds the text recognized in your screenshots, their categories, and anything you add yourself: tags, notes, favorites, and collections. It also keeps your settings and a cache of thumbnails. Your screenshot files are never copied or moved. This data is excluded from Android backups.</string>
+    <string name="privacy_processing_title">How screenshots are read</string>
+    <string name="privacy_processing_body">Text recognition uses Google ML Kit running on your phone. The recognition model ships inside Trove, so screenshots are not sent to Google or anyone else to be read.</string>
+    <string name="privacy_sharing_title">What leaves your phone</string>
+    <string name="privacy_sharing_body">Nothing, unless you choose to send it. Trove has no account, no ads, and no internet permission. It does not upload screenshots, thumbnails, recognized text, or your library. When you use Share, the screenshot goes to the app you pick, and Trove has no say in what that app does with it.</string>
+    <string name="privacy_usage_title">Usage data</string>
+    <string name="privacy_usage_body">Share anonymous usage data is off by default. Trove currently has no internet permission, so it cannot send usage data even if you turn the switch on. If that changes, this policy will be updated first.</string>
+    <string name="privacy_permissions_title">Permissions Trove asks for</string>
+    <string name="privacy_permissions_body">Photos: to find and display your screenshots. Notifications and a foreground service: to show progress while Trove reads your screenshots in the background. Trove does not ask for your location, contacts, microphone, camera, or files outside your photo library.</string>
+    <string name="privacy_control_title">Your choices</string>
+    <string name="privacy_control_body">You can turn off background scanning, clear the image cache, and re-read your screenshots at any time from Settings. Secure screen hides Trove in recent apps and blocks screenshots of it. Trove only deletes a screenshot after you confirm. Revoke photo access in Android settings and Trove can no longer read your library. Uninstalling Trove removes all of its data.</string>
+    <string name="privacy_changes_title">Changes to this policy</string>
+    <string name="privacy_changes_body">If this policy changes, the new version appears here with an updated date.</string>
+    <string name="privacy_contact_title">Contact</string>
+    <string name="privacy_contact_body">Questions about this policy or your data? Email stormz5m@proton.me.</string>
+    <string name="settings_theme">Theme</string>
+    <string name="settings_appearance">Appearance</string>
+    <string name="settings_dynamic_color_body">Use colors from your wallpaper</string>
+    <string name="settings_grid_columns">Grid columns</string>
+    <string name="settings_default_view">Library opens in</string>
+    <string name="settings_show_recent">Show recent on Home</string>
+    <string name="settings_show_categories">Show categories on Home</string>
+    <string name="settings_scanning">Scanning</string>
+    <string name="settings_auto_scan">Scan in the background</string>
+    <string name="scan_off">Off</string>
+    <string name="scan_hourly">1 hr</string>
+    <string name="scan_6h">6 hr</string>
+    <string name="scan_daily">Daily</string>
+    <string name="settings_charging_only">Only while charging</string>
+    <string name="settings_reread">Re-read all screenshots</string>
+    <string name="settings_reread_body">Runs text recognition again. Tags, notes, and favorites stay.</string>
+    <string name="settings_reread_started">Re-reading in the background</string>
+    <string name="settings_secure">Secure screen</string>
+    <string name="settings_secure_body">Hides Trove in recent apps and blocks screenshots of it</string>
+    <string name="settings_storage">Storage</string>
+    <string name="settings_clear_cache">Clear image cache</string>
+    <string name="settings_clear_cache_body">Frees space. Thumbnails reload as you scroll.</string>
+    <string name="settings_cache_cleared">Image cache cleared</string>
+    <string name="settings_reset">Reset settings</string>
+    <string name="settings_reset_body">Puts every option on this screen back to its default</string>
+    <string name="settings_reset_done">Settings reset</string>
+    <string name="settings_dynamic_color">Dynamic color</string>
+    <string name="settings_reindex">Rescan screenshots</string>
+    <string name="settings_analytics">Share anonymous usage data</string>
+
+    <string name="library_grid">Grid</string>
+    <string name="library_timeline">Timeline</string>
+    <string name="section_today">Today</string>
+    <string name="section_yesterday">Yesterday</string>
+    <string name="section_this_week">This Week</string>
+    <string name="section_this_month">Earlier This Month</string>
+
+    <string name="action_back">Back</string>
+    <string name="action_clear_selection">Clear selection</string>
+    <string name="action_remove_tag">Remove tag %1$s</string>
+    <string name="collection_name">Name</string>
+    <string name="screenshot_label">Screenshot from %1$s</string>
+    <string name="settings_rescan_started">Rescanning in the background</string>
+    <string name="settings_duplicates">Find duplicates</string>
+    <string name="settings_version">%1$s %2$s</string>
+    <string name="theme_system">System</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_dark">Dark</string>
+    <string name="duplicates_title">Duplicates</string>
+    <string name="duplicate_keep">Keep</string>
+    <string name="empty_duplicates_title">No duplicates</string>
+    <string name="empty_duplicates_body">Trove looks for identical files. It never deletes anything without asking.</string>
+    <string name="empty_collection_title">Empty collection</string>
+    <string name="empty_collection_body">Open a screenshot, tap Details, and add it here.</string>
+    <string name="delete_confirm_body">You can\'t undo this.</string>
+
+    <plurals name="screenshot_count">
+        <item quantity="one">%1$d screenshot</item>
+        <item quantity="other">%1$d screenshots</item>
+    </plurals>
+    <plurals name="screenshots_saved">
+        <item quantity="one">%1$d screenshot saved</item>
+        <item quantity="other">%1$d screenshots saved</item>
+    </plurals>
+    <plurals name="selected_count">
+        <item quantity="one">%1$d selected</item>
+        <item quantity="other">%1$d selected</item>
+    </plurals>
+    <plurals name="duplicate_group_title">
+        <item quantity="one">%1$d identical copy</item>
+        <item quantity="other">%1$d identical copies</item>
+    </plurals>
+    <plurals name="duplicate_delete_action">
+        <item quantity="one">Keep newest, delete %1$d</item>
+        <item quantity="other">Keep newest, delete %1$d</item>
+    </plurals>
+    <plurals name="delete_confirm_title">
+        <item quantity="one">Delete %1$d screenshot?</item>
+        <item quantity="other">Delete %1$d screenshots?</item>
+    </plurals>
+</resources>
