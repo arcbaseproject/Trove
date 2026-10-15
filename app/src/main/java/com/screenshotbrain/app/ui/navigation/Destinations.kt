@@ -1,5 +1,6 @@
 package com.trove.app.ui.navigation
 
+import com.trove.app.ui.settings.SettingsSection
 import java.net.URLDecoder
 import java.net.URLEncoder
 
@@ -37,6 +38,9 @@ object Destinations {
 
     const val VIEWER = "viewer/{source}/{screenshotId}"
     fun viewer(source: ScreenshotSource, screenshotId: Long) = "viewer/${source.encoded}/$screenshotId"
+
+    const val SETTINGS_SECTION = "settings/section/{section}"
+    fun settingsSection(section: SettingsSection) = "settings/section/${section.name}"
 
     const val PRIVACY = "settings/privacy"
     const val DUPLICATES = "settings/duplicates"

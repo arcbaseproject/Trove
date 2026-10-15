@@ -63,6 +63,7 @@
     <string name="action_new">New</string>
     <string name="action_create">Create</string>
     <string name="action_cancel">Cancel</string>
+    <string name="action_reset">Reset</string>
 
     <string name="details_title">Details</string>
     <string name="details_dimensions">Dimensions</string>
@@ -89,11 +90,11 @@
     <string name="privacy_processing_title">How screenshots are read</string>
     <string name="privacy_processing_body">Text recognition uses Google ML Kit running on your phone. The recognition model ships inside Trove, so screenshots are not sent to Google or anyone else to be read.</string>
     <string name="privacy_sharing_title">What leaves your phone</string>
-    <string name="privacy_sharing_body">Nothing, unless you choose to send it. Trove has no account, no ads, and no internet permission. It does not upload screenshots, thumbnails, recognized text, or your library. When you use Share, the screenshot goes to the app you pick, and Trove has no say in what that app does with it.</string>
+    <string name="privacy_sharing_body">Nothing about your library, ever. Trove has no account and no ads, and it does not upload screenshots, thumbnails, recognized text, or search history. Its only network use is the update check: a request to GitHub for the latest release, which sends nothing but the request itself, and the APK download if you accept an update. When you use Share, the screenshot goes to the app you pick, and Trove has no say in what that app does with it.</string>
     <string name="privacy_usage_title">Usage data</string>
-    <string name="privacy_usage_body">Share anonymous usage data is off by default. Trove currently has no internet permission, so it cannot send usage data even if you turn the switch on. If that changes, this policy will be updated first.</string>
+    <string name="privacy_usage_body">Share anonymous usage data is off by default. Trove has no analytics backend, so nothing is collected or sent even when the switch is on. The only network calls Trove makes are the GitHub update check and, if you accept one, the APK download.</string>
     <string name="privacy_permissions_title">Permissions Trove asks for</string>
-    <string name="privacy_permissions_body">Photos: to find and display your screenshots. Notifications and a foreground service: to show progress while Trove reads your screenshots in the background. Trove does not ask for your location, contacts, microphone, camera, or files outside your photo library.</string>
+    <string name="privacy_permissions_body">Photos: to find and display your screenshots. Notifications and a foreground service: to show progress while Trove reads your screenshots in the background. Internet and install packages: only to check GitHub for a new release and, if you accept, download and install it. Trove does not ask for your location, contacts, microphone, camera, or files outside your photo library.</string>
     <string name="privacy_control_title">Your choices</string>
     <string name="privacy_control_body">You can turn off background scanning, clear the image cache, and re-read your screenshots at any time from Settings. Secure screen hides Trove in recent apps and blocks screenshots of it. Trove only deletes a screenshot after you confirm. Revoke photo access in Android settings and Trove can no longer read your library. Uninstalling Trove removes all of its data.</string>
     <string name="privacy_changes_title">Changes to this policy</string>
@@ -119,15 +120,22 @@
     <string name="settings_reread_started">Re-reading in the background</string>
     <string name="settings_secure">Secure screen</string>
     <string name="settings_secure_body">Hides Trove in recent apps and blocks screenshots of it</string>
-    <string name="settings_storage">Storage</string>
+    <string name="settings_maintenance">Maintenance</string>
+    <string name="settings_maintenance_summary">Duplicates, cache, reset</string>
+    <string name="settings_privacy_summary">Secure screen, usage data</string>
+    <string name="settings_theme_summary">Theme: %1$s</string>
+    <string name="settings_scan_summary">Background scan: %1$s</string>
+    <string name="settings_library_summary">%1$s, %2$d columns</string>
     <string name="settings_clear_cache">Clear image cache</string>
     <string name="settings_clear_cache_body">Frees space. Thumbnails reload as you scroll.</string>
     <string name="settings_cache_cleared">Image cache cleared</string>
     <string name="settings_reset">Reset settings</string>
     <string name="settings_reset_body">Puts every option on this screen back to its default</string>
     <string name="settings_reset_done">Settings reset</string>
+    <string name="settings_reset_confirm">Reset all settings?</string>
     <string name="settings_dynamic_color">Dynamic color</string>
     <string name="settings_reindex">Rescan screenshots</string>
+    <string name="settings_reindex_body">Picks up new screenshots now</string>
     <string name="settings_analytics">Share anonymous usage data</string>
 
     <string name="library_grid">Grid</string>
@@ -145,6 +153,16 @@
     <string name="settings_rescan_started">Rescanning in the background</string>
     <string name="settings_duplicates">Find duplicates</string>
     <string name="settings_version">%1$s %2$s</string>
+
+    <string name="settings_check_updates">Check for updates</string>
+    <string name="settings_up_to_date">You\'re on the latest version</string>
+    <string name="update_title">Trove %1$s</string>
+    <string name="update_install">Update now</string>
+    <string name="update_later">Not now</string>
+    <string name="update_badge">New version</string>
+    <string name="update_current">You\'re on %1$s</string>
+    <string name="update_whats_new">What\'s new</string>
+    <string name="update_downloading">Downloading… %1$d%%</string>
     <string name="theme_system">System</string>
     <string name="theme_light">Light</string>
     <string name="theme_dark">Dark</string>

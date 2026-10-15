@@ -85,7 +85,7 @@ class LibraryViewModel @Inject constructor(
 
     fun toggleFavoriteForSelection() = viewModelScope.launch {
         val ids = _uiState.value.selection
-        val makeFavorite = true
+        val makeFavorite = !screenshotRepository.getScreenshotsByIds(ids.toList()).all { it.isFavorite }
         ids.forEach { screenshotRepository.setFavorite(it, makeFavorite) }
         clearSelection()
     }

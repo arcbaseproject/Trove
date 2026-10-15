@@ -18,7 +18,7 @@ import com.trove.app.R
 import com.trove.app.domain.model.IndexingProgress
 import com.trove.app.ui.theme.Spacing
 
-/** Card with a periwinkle progress bar, shown while background indexing runs. */
+/** Card with a progress bar, shown while background indexing runs. */
 @Composable
 fun IndexingBanner(progress: IndexingProgress, modifier: Modifier = Modifier) {
     AnimatedVisibility(visible = progress.isRunning && !progress.isComplete) {

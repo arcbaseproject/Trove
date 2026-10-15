@@ -135,7 +135,7 @@ fun KitCard(
     }
 }
 
-/** Small rounded tag, periwinkle by default. */
+/** Small rounded tag, grey by default. */
 @Composable
 fun TagPill(
     text: String,

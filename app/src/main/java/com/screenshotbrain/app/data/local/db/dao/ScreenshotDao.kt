@@ -6,6 +6,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Transaction
 import androidx.room.Update
 import com.trove.app.data.local.db.entity.ScreenshotEntity
 import kotlinx.coroutines.flow.Flow
@@ -25,11 +26,30 @@ interface ScreenshotDao {
     @Query("SELECT mediaStoreId FROM screenshots")
     suspend fun getAllMediaStoreIds(): List<Long>
 
+    // search_index is FTS4: no foreign key, so no cascade. Its rows are deleted by hand here.
+    @Transaction
+    suspend fun deleteByMediaStoreIds(mediaStoreIds: List<Long>) {
+        deleteSearchRowsByMediaStoreIds(mediaStoreIds)
+        deleteRowsByMediaStoreIds(mediaStoreIds)
+    }
+
+    @Transaction
+    suspend fun deleteByIds(ids: List<Long>) {
+        deleteSearchRowsByIds(ids)
+        deleteRowsByIds(ids)
+    }
+
+    @Query("DELETE FROM search_index WHERE screenshotId IN (SELECT id FROM screenshots WHERE mediaStoreId IN (:mediaStoreIds))")
+    suspend fun deleteSearchRowsByMediaStoreIds(mediaStoreIds: List<Long>)
+
     @Query("DELETE FROM screenshots WHERE mediaStoreId IN (:mediaStoreIds)")
-    suspend fun deleteByMediaStoreIds(mediaStoreIds: List<Long>)
+    suspend fun deleteRowsByMediaStoreIds(mediaStoreIds: List<Long>)
+
+    @Query("DELETE FROM search_index WHERE screenshotId IN (:ids)")
+    suspend fun deleteSearchRowsByIds(ids: List<Long>)
 
     @Query("DELETE FROM screenshots WHERE id IN (:ids)")
-    suspend fun deleteByIds(ids: List<Long>)
+    suspend fun deleteRowsByIds(ids: List<Long>)
 
     @Query("SELECT * FROM screenshots WHERE id = :id")
     fun observeById(id: Long): Flow<ScreenshotEntity?>
@@ -91,8 +111,8 @@ interface ScreenshotDao {
     )
     suspend fun getByCollectionOnce(collectionId: Long, limit: Int): List<ScreenshotEntity>
 
-    @Query("SELECT * FROM screenshots WHERE ocrProcessed = 0 LIMIT :limit")
-    suspend fun getUnprocessedForOcr(limit: Int): List<ScreenshotEntity>
+    @Query("SELECT * FROM screenshots WHERE ocrProcessed = 0 AND id NOT IN (:excludeIds) LIMIT :limit")
+    suspend fun getUnprocessedForOcr(limit: Int, excludeIds: Collection<Long>): List<ScreenshotEntity>
 
     @Query("SELECT * FROM screenshots WHERE classified = 0 LIMIT :limit")
     suspend fun getUnclassified(limit: Int): List<ScreenshotEntity>
@@ -129,6 +149,7 @@ interface ScreenshotDao {
         """
         SELECT sizeBytes || ':' || width || ':' || height AS signature, GROUP_CONCAT(id) AS ids, COUNT(*) AS count
         FROM screenshots
+        WHERE sizeBytes > 0 AND width > 0 AND height > 0
         GROUP BY signature
         HAVING count > 1
         """,

@@ -16,16 +16,16 @@ import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
 // primary is ink (black in light, near-white in dark), so Buttons, selected chips and FABs render
-// as the high-contrast pills from the reference design. secondary carries the periwinkle accent.
+// as the high-contrast pills from the reference design. secondary is neutral too: ink accents on grey pills.
 private val LightColors = lightColorScheme(
     primary = Ink,
     onPrimary = Color.White,
     primaryContainer = Ink,
     onPrimaryContainer = Color.White,
-    secondary = Periwinkle,
+    secondary = Ink,
     onSecondary = Color.White,
-    secondaryContainer = PeriwinkleContainer,
-    onSecondaryContainer = OnPeriwinkleContainer,
+    secondaryContainer = PillLight,
+    onSecondaryContainer = Ink,
     tertiary = Peach,
     tertiaryContainer = PeachContainer,
     onTertiaryContainer = OnPeachContainer,
@@ -49,10 +49,10 @@ private val DarkColors = darkColorScheme(
     onPrimary = PaperDark,
     primaryContainer = InkDark,
     onPrimaryContainer = PaperDark,
-    secondary = PeriwinkleDark,
+    secondary = InkDark,
     onSecondary = PaperDark,
-    secondaryContainer = PeriwinkleContainerDark,
-    onSecondaryContainer = OnPeriwinkleContainerDark,
+    secondaryContainer = PillDark,
+    onSecondaryContainer = InkDark,
     tertiary = PeachDark,
     tertiaryContainer = PeachContainerDark,
     onTertiaryContainer = PeachDark,

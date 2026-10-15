@@ -66,6 +66,8 @@ import com.trove.app.ui.search.SearchScreen
 import com.trove.app.ui.settings.DuplicatesScreen
 import com.trove.app.ui.settings.PrivacyScreen
 import com.trove.app.ui.settings.SettingsScreen
+import com.trove.app.ui.settings.SettingsSection
+import com.trove.app.ui.settings.SettingsSectionScreen
 import com.trove.app.ui.viewer.ScreenshotViewerScreen
 
 private data class BottomTab(
@@ -137,7 +139,16 @@ fun ScreenshotBrainNavHost() {
                 )
             }
             composable(Destinations.SETTINGS) {
-                SettingsScreen(
+                SettingsScreen(onOpenSection = { navController.navigate(Destinations.settingsSection(it)) })
+            }
+            composable(
+                route = Destinations.SETTINGS_SECTION,
+                arguments = listOf(navArgument("section") { type = NavType.StringType }),
+            ) { backStackEntry ->
+                val section = SettingsSection.valueOf(backStackEntry.arguments?.getString("section") ?: return@composable)
+                SettingsSectionScreen(
+                    section = section,
+                    onBack = { navController.popBackStack() },
                     onOpenPrivacy = { navController.navigate(Destinations.PRIVACY) },
                     onOpenDuplicates = { navController.navigate(Destinations.DUPLICATES) },
                 )
@@ -194,7 +205,6 @@ fun ScreenshotBrainNavHost() {
                 shape = RoundedCornerShape(32.dp),
                 color = MaterialTheme.colorScheme.surface,
                 tonalElevation = 3.dp,
-                shadowElevation = 8.dp,
             ) {
                 Row(modifier = Modifier.padding(8.dp), horizontalArrangement = Arrangement.SpaceBetween) {
                     bottomTabs.forEach { tab ->

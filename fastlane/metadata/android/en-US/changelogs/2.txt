@@ -1,0 +1,7 @@
+- Check for updates from Settings, with a prompt when a new release is out
+- Search returns the newest matches and no longer counts deleted screenshots
+- Screenshots that fail text recognition are retried on the next scan
+- Background scans show progress and no longer overlap with manual scans
+- Multi-select can now remove favorites
+- Duplicate finder ignores screenshots with unknown size
+- Neutral color palette and a flatter navigation bar

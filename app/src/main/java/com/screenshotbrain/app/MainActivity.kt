@@ -26,6 +26,7 @@ import com.trove.app.ui.permission.rememberScreenshotsPermissionState
 import com.trove.app.ui.settings.LocalUserPreferences
 import com.trove.app.ui.settings.SettingsViewModel
 import com.trove.app.ui.theme.ScreenshotBrainTheme
+import com.trove.app.ui.update.UpdatePrompt
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -72,6 +73,7 @@ private fun ScreenshotBrainRoot(onPermissionGranted: () -> Unit) {
                 // Onboarding only for people who haven't granted access yet; existing users skip it.
                 if (permissionState.isGranted) {
                     ScreenshotBrainNavHost()
+                    UpdatePrompt()
                 } else if (!preferences.onboardingDone) {
                     OnboardingScreen(
                         onFinish = {

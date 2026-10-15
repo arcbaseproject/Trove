@@ -1,6 +1,6 @@
 # Trove
 
-Local-first Android app that turns your screenshot folder into a searchable library: on-device OCR, automatic categories, collections, and full-text search. Nothing leaves the device — no network calls, no analytics unless you opt in.
+Local-first Android app that turns your screenshot folder into a searchable library: on-device OCR, automatic categories, collections, and full-text search. Nothing about your library leaves the device — no analytics, no uploads. The only network use is an optional update check against this repo's GitHub releases.
 
 ## Stack
 

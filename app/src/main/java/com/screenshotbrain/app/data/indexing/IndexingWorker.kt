@@ -41,10 +41,17 @@ class IndexingWorker @AssistedInject constructor(
     private val ocrEngine: OcrEngine,
     private val classifier: Classifier,
     private val searchIndexUpdater: SearchIndexUpdater,
+    private val indexingManager: IndexingManager,
 ) : CoroutineWorker(context, params) {
 
     override suspend fun doWork(): Result {
         if (!mediaStoreSource.hasReadPermission()) return Result.success()
+        // All indexing runs as the one-time unique job, so runs never overlap and the progress banner sees them.
+        // shortcut: the forwarded run ignores the periodic job's charging constraint; pass constraints through if that matters.
+        if (indexingManager.isPeriodicRun(id)) {
+            indexingManager.runNow()
+            return Result.success()
+        }
 
         syncMediaStore()
 
@@ -52,11 +59,15 @@ class IndexingWorker @AssistedInject constructor(
         var processed = screenshotDao.getProcessedCount()
         setProgress(IndexingProgressData.toWorkData(processed, total))
 
+        // OCR failures stay unprocessed for the next run; skipping them here keeps this run from looping.
+        // shortcut: a permanently broken file costs one failed OCR per run; add an attempt counter column if that shows up.
+        val failedIds = mutableSetOf<Long>()
         while (true) {
-            val batch = screenshotDao.getUnprocessedForOcr(BATCH_SIZE)
-            if (batch.isEmpty()) break
+            val batch = screenshotDao.getUnprocessedForOcr(BATCH_SIZE, failedIds)
+            // Stays under SQLite's 999 bind-variable limit; a run with this many failures is broken anyway.
+            if (batch.isEmpty() || failedIds.size >= 900) break
             for (screenshot in batch) {
-                runOcrAndClassify(screenshot)
+                if (!runOcrAndClassify(screenshot)) failedIds += screenshot.id
                 processed++
                 setProgress(IndexingProgressData.toWorkData(processed, total))
             }
@@ -83,12 +94,13 @@ class IndexingWorker @AssistedInject constructor(
         }
     }
 
-    private suspend fun runOcrAndClassify(screenshot: ScreenshotEntity) {
+    /** Returns false when OCR failed. The screenshot is still classified and indexed by name and source app. */
+    private suspend fun runOcrAndClassify(screenshot: ScreenshotEntity): Boolean {
         val outcome = ocrEngine.recognize(Uri.parse(screenshot.contentUri))
         if (outcome.success) {
             ocrDaoUpsert(screenshot.id, outcome.text)
+            screenshotDao.markOcrProcessed(screenshot.id)
         }
-        screenshotDao.markOcrProcessed(screenshot.id)
 
         val categories = classifier.classify(
             ClassificationInput(
@@ -102,6 +114,7 @@ class IndexingWorker @AssistedInject constructor(
         screenshotDao.markClassified(screenshot.id)
 
         searchIndexUpdater.rebuild(screenshot.id)
+        return outcome.success
     }
 
     private suspend fun ocrDaoUpsert(screenshotId: Long, text: String) {

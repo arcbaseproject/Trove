@@ -16,15 +16,17 @@ interface SearchDao {
     suspend fun delete(screenshotId: Long)
 
     /**
-     * Ranked FTS4 match. [matchQuery] is expected to already be sanitized/prefixed by
+     * FTS4 match, newest screenshots first, so [limit] cuts the oldest. [matchQuery] is expected to already be sanitized/prefixed by
      * [com.trove.app.data.repository.FtsQuerySanitizer]. Swapping this for a
      * vector-similarity lookup later only requires a new SearchRepository implementation —
      * callers only see screenshot ids, never SQL.
      */
     @Query(
         """
-        SELECT screenshotId FROM search_index
+        SELECT search_index.screenshotId FROM search_index
+        INNER JOIN screenshots s ON s.id = search_index.screenshotId
         WHERE search_index MATCH :matchQuery
+        ORDER BY s.dateAddedSec DESC
         LIMIT :limit
         """,
     )

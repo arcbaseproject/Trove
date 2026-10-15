@@ -18,6 +18,7 @@ coil = "2.7.0"
 mlkitTextRecognition = "16.0.1"
 datastore = "1.1.1"
 kotlinxCoroutines = "1.9.0"
+junit = "4.13.2"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -50,6 +51,7 @@ coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coi
 mlkit-text-recognition = { group = "com.google.mlkit", name = "text-recognition", version.ref = "mlkitTextRecognition" }
 datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore" }
 kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlinxCoroutines" }
+junit = { group = "junit", name = "junit", version.ref = "junit" }
 kotlinx-coroutines-play-services = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-play-services", version.ref = "kotlinxCoroutines" }
 
 [plugins]

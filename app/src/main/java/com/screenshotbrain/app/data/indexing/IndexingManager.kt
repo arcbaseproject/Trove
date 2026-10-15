@@ -11,10 +11,12 @@ import androidx.work.WorkInfo
 import androidx.work.WorkManager
 import com.trove.app.domain.model.IndexingProgress
 import dagger.hilt.android.qualifiers.ApplicationContext
+import java.util.UUID
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import javax.inject.Singleton
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 
 private const val UNIQUE_WORK_NAME = "screenshot_indexing"
@@ -45,6 +47,9 @@ class IndexingManager @Inject constructor(
             .build()
         workManager.enqueueUniquePeriodicWork(PERIODIC_WORK_NAME, ExistingPeriodicWorkPolicy.UPDATE, request)
     }
+
+    suspend fun isPeriodicRun(workId: UUID): Boolean =
+        workManager.getWorkInfosForUniqueWorkFlow(PERIODIC_WORK_NAME).first().any { it.id == workId }
 
     val progress: Flow<IndexingProgress> =
         workManager.getWorkInfosForUniqueWorkFlow(UNIQUE_WORK_NAME).map { infos ->
