@@ -70,7 +70,10 @@ class IndexingWorker @AssistedInject constructor(
 
         val known = screenshotDao.getAllMediaStoreIds().toSet()
         val removed = known - discoveredIds
-        if (removed.isNotEmpty()) {
+        // An empty scan is far more likely a transient MediaStore/storage failure than every screenshot
+        // being gone; deleting would cascade away notes, tags and collections.
+        // shortcut: a user who truly deletes all screenshots keeps stale rows until one new screenshot appears.
+        if (removed.isNotEmpty() && discovered.isNotEmpty()) {
             screenshotDao.deleteByMediaStoreIds(removed.toList())
         }
 
