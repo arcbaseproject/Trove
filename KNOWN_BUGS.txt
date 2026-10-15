@@ -1,0 +1,55 @@
+Known bugs (found 2026-10-15, not yet fixed)
+============================================
+
+Paths are relative to app/src/main/java/com/screenshotbrain/app/.
+
+1. Deleted screenshots stay in the search index
+   Where: data/local/db/dao/ScreenshotDao.kt (deleteByIds, deleteByMediaStoreIds)
+   search_index is an FTS4 table, so it has no foreign key and no cascade.
+   SearchDao.delete() exists but nothing calls it. Every screenshot removed
+   (by the user or by a MediaStore sync) leaves its search row behind. Those
+   rows still count against the search LIMIT and are then filtered out by
+   getByIds(), so searches return fewer results than they should.
+   Fix: delete the matching search_index rows whenever screenshot rows are
+   deleted.
+
+2. Search drops arbitrary matches instead of the oldest
+   Where: data/local/db/dao/SearchDao.kt:28
+   matchScreenshotIds() applies LIMIT with no ORDER BY, even though its
+   comment says "Ranked". FtsSearchRepository sorts by date only after the
+   cut, so when there are more matches than the limit, recent ones can be
+   missing.
+   Fix: join to screenshots and ORDER BY dateAddedSec DESC before the LIMIT.
+
+3. A failed OCR is never retried
+   Where: data/indexing/IndexingWorker.kt (runOcrAndClassify)
+   markOcrProcessed() runs even when OCR fails, and the screenshot is then
+   classified using empty text. One failure (file busy, decode error) leaves
+   it unsearchable and wrongly categorized for good. The only way back is
+   "reset indexing" in Settings.
+   Fix: mark the screenshot processed only on success, with a retry cap so a
+   broken file can't loop forever.
+
+4. Background indexing is invisible and can overlap with manual runs
+   Where: data/indexing/IndexingManager.kt
+   The periodic job (PERIODIC_WORK_NAME) and the one-time job
+   (UNIQUE_WORK_NAME) have different unique names. The progress flow only
+   watches the one-time job, so periodic runs show no banner. Both jobs can
+   also run at the same time and process the same batch twice.
+   Fix: watch both jobs for progress, and have the worker skip if the other
+   one is running.
+
+5. "Toggle favorite" on a selection can only add favorites
+   Where: ui/library/LibraryViewModel.kt (toggleFavoriteForSelection)
+   makeFavorite is hard-coded to true, so you can't unfavorite screenshots
+   from a multi-select.
+   Fix: set false if every selected screenshot is already a favorite,
+   otherwise true.
+
+6. Duplicate finder lumps together screenshots with unknown size
+   Where: data/local/db/dao/ScreenshotDao.kt (findExactDuplicateGroups)
+   Duplicates are grouped by sizeBytes:width:height. MediaStore can report 0
+   for these on files it hasn't scanned yet, so unrelated screenshots end up
+   in one "duplicate" group. Deletion still goes through the system
+   confirmation dialog, so this misleads the user but never deletes silently.
+   Fix: exclude rows where sizeBytes, width or height is 0.

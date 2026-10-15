@@ -25,6 +25,13 @@ class MediaStoreScreenshotSource @Inject constructor(
     fun queryAllScreenshots(): List<DiscoveredScreenshot> {
         val results = mutableListOf<DiscoveredScreenshot>()
         val collection = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+        // RELATIVE_PATH only exists on API 29+; older versions expose the absolute file path instead.
+        @Suppress("DEPRECATION")
+        val pathColumn = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            MediaStore.Images.Media.RELATIVE_PATH
+        } else {
+            MediaStore.Images.Media.DATA
+        }
         val projection = buildList {
             add(MediaStore.Images.Media._ID)
             add(MediaStore.Images.Media.DISPLAY_NAME)
@@ -34,13 +41,13 @@ class MediaStoreScreenshotSource @Inject constructor(
             add(MediaStore.Images.Media.HEIGHT)
             add(MediaStore.Images.Media.SIZE)
             add(MediaStore.Images.Media.MIME_TYPE)
-            add(MediaStore.Images.Media.RELATIVE_PATH)
+            add(pathColumn)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 add(MediaStore.Images.Media.OWNER_PACKAGE_NAME)
             }
         }.toTypedArray()
 
-        val selection = "${MediaStore.Images.Media.RELATIVE_PATH} LIKE ? OR " +
+        val selection = "$pathColumn LIKE ? OR " +
             "${MediaStore.Images.Media.DISPLAY_NAME} LIKE ?"
         val selectionArgs = arrayOf("%Screenshot%", "Screenshot%")
 
@@ -59,7 +66,7 @@ class MediaStoreScreenshotSource @Inject constructor(
             val heightCol = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.HEIGHT)
             val sizeCol = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.SIZE)
             val mimeCol = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.MIME_TYPE)
-            val pathCol = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.RELATIVE_PATH)
+            val pathCol = cursor.getColumnIndexOrThrow(pathColumn)
             val ownerCol = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 cursor.getColumnIndex(MediaStore.Images.Media.OWNER_PACKAGE_NAME)
             } else {

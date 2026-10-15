@@ -11,6 +11,6 @@ object FtsQuerySanitizer {
     fun toMatchQuery(rawQuery: String): String? {
         val tokens = TOKEN_REGEX.findAll(rawQuery).map { it.value }.toList()
         if (tokens.isEmpty()) return null
-        return tokens.joinToString(" ") { "\"$it\"*" }
+        return tokens.joinToString(" ") { "\"$it*\"" }
     }
 }
